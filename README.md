@@ -1,4 +1,6 @@
 # DENV
+Docker開發環境
+
 ## 安裝
 ```bash
 sudo python3 -m pip install -U git+https://github.com/ITRI-E300/docker-dev-env#subdirectory=cli
@@ -34,3 +36,9 @@ denv update
 ```
 ### 使用 (DockerHub)
 待補充
+
+## 維護指南
+### Repo結構
+- `.github/`: Github Action 設定檔，當有Push(或每月)自動建置新映像檔
+- `cli/`: 建立 Container 的輔助工具
+- `dockerfile/`: 映像檔建構檔案
