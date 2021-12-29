@@ -58,6 +58,11 @@ RUN sudo apt install nodejs
 RUN npm install -g yarn&&yarn global add code-server
 ENV SHELL=/bin/bash
 
+# say hello to user
+COPY script_files/.hello.sh /.hello.sh
+RUN chmod 777 /.hello.sh
+RUN echo 'sh .hello.sh' >> /etc/bash.bashrc
+
 #
 EXPOSE 22
 EXPOSE 8888
