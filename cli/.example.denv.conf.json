@@ -1,0 +1,6 @@
+{
+    "device":{
+        "device_a":"/data1",
+        "device_b":"/data2"
+    }
+}

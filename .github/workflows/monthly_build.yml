@@ -1,0 +1,31 @@
+name: Build and Publish
+
+on:
+  push:
+    branches: [ master ]
+    paths-ignore:
+#       - ".github/**"
+      - "*.md"
+  pull_request:
+    branches: [ master ]
+  schedule:
+    - cron: '0 0 1 * *'
+
+jobs:
+  monthly_build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Docker login
+      uses: azure/docker-login@v1
+      with:
+        username: p208p2002
+        password: ${{ secrets.DOCKER_HUB_PWD }}
+    - name: Build
+      run: |
+        cd dockerfile && docker build -t=e300nlp/dev-env:cu10.1-py36-tf2.3.0-torch1.6.0-jupyter-vscode -f cu10.1-py36-tf2.3.0-torch1.6.0-jupyter-vscode .
+        cd dockerfile && docker build -t=e300nlp/dev-env:cu10.1-py36-tf2.3.1-torch1.7.0-jupyter-vscode -f cu10.1-py36-tf2.3.1-torch1.7.0-jupyter-vscode .
+    - name: Push
+      run: |
+        docker push e300nlp/dev-env:cu10.1-py36-tf2.3.0-torch1.6.0-jupyter-vscode
+        docker push e300nlp/dev-env:cu10.1-py36-tf2.3.1-torch1.7.0-jupyter-vscode
