@@ -5,9 +5,7 @@ Docker開發環境
 ```bash
 sudo python3 -m pip install -U git+https://github.com/ITRI-E300/docker-dev-env#subdirectory=cli
 ```
-## 使用
-### CLI
-#### 配置設定檔
+#### 配置設定檔 (Optional)
 在家目錄下配置`.denv.conf.json`
 ```json
 {
@@ -18,6 +16,10 @@ sudo python3 -m pip install -U git+https://github.com/ITRI-E300/docker-dev-env#s
 }
 ```
 - `device`: 在創建新的volume的時候能夠提供額外存放選項，若無可空
+
+
+## 使用
+### CLI
 #### 建立Container
 ```bash
 denv create
