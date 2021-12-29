@@ -22,6 +22,7 @@ sudo python3 -m pip install -U git+https://github.com/ITRI-E300/docker-dev-env#s
 ```bash
 denv create
 ```
+> 使用`--dry_run`來測試指令
 #### 建立新Volume
 ```bash
 denv create_volume
