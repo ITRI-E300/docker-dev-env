@@ -1,7 +1,7 @@
 import setuptools
 
 setuptools.setup(
-    name="docker_for_ai_dev_cli", # 
+    name="denv", # 
     version='0.0.1',
     author="Philip Huang",
     author_email="p208p2002@gmail.com",

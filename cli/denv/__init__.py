@@ -19,7 +19,7 @@ parser.add_argument("action", help="select one of: {list|create|update}")
 parser.add_argument('--dry-run','-d',action='store_true')
 parser.error = arg_parser_error_handler
 args = parser.parse_args()
-print(args)
+# print(args)
 
 
 if not os.path.isfile(os.path.join(Path.home(),'.denv.conf.json')):
@@ -28,8 +28,8 @@ if not os.path.isfile(os.path.join(Path.home(),'.denv.conf.json')):
 else:
     with open(os.path.join(Path.home(),'.denv.conf.json'),'r',encoding='utf-8') as f:
         conf = json.load(f)
-    pprint(conf)
-    print()
+    # pprint(conf)
+    # print()
 
 def get_image_infos():
     r = requests.get('https://registry.hub.docker.com/v2/repositories/e300nlp/dev-env/tags')
