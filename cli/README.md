@@ -1,4 +1,4 @@
-# Docker for AI DEV CLI
+# DENV CLI
 This CLI tool work with [e300nlp/dev-env](https://github.com/e300nlp/dev-env)
 
 ## Install
