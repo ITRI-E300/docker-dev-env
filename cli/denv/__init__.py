@@ -43,7 +43,7 @@ def list_image_tags():
         last_updater_username = image['last_updater_username']
         image_name = image['name']
         # print("%s/%s"%(last_updater_username,image_name))
-        images_tags.append("%s/docker-for-ai-dev:%s"%(last_updater_username,image_name))
+        images_tags.append("%s/dev-env:%s"%(last_updater_username,image_name))
     return images_tags
 
 def create_container():
