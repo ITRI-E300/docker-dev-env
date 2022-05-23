@@ -134,7 +134,7 @@ def create_container():
 
 def create_volume(volume_name=None):    
     # step 1: setect device (depend on conf)
-    candidate_device = conf.get('device')
+    candidate_device = conf.get('device',{})
     print("Select device (where to save volume)")
     print("[0]","* docker default *")
 
