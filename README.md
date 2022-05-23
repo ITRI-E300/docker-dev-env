@@ -45,3 +45,6 @@ denv update
 - `.github/`: Github Action 設定檔，當有Push(或每月)自動建置新映像檔
 - `cli/`: 建立 Container 的輔助工具
 - `dockerfile/`: 映像檔建構檔案
+
+sudo docker build -t test -f py3.9.8-jupyter-vscode .
+sudo docker run -itd --rm --gpus all -v p208:/user_data --name=p208 -e"NAME"=p208 -e"PASSWORD"=p2002   -p 14001:22 -p 14002:8888 -p 14003:8080 test
