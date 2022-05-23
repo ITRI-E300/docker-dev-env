@@ -4,6 +4,9 @@ LABEL maintainer="p208p2002@gmail.com"
 #
 WORKDIR /
 
+RUN rm /etc/apt/sources.list.d/cuda.list
+RUN rm /etc/apt/sources.list.d/nvidia-ml.list
+
 # 
 RUN apt-get update
 RUN apt-get install -y sudo \ 

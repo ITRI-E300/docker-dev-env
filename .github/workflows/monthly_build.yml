@@ -35,4 +35,17 @@ jobs:
         docker build -t=e300nlp/dev-env:py3.7.13-jupyter-vscode -f py3.7.13-jupyter-vscode .
         docker push e300nlp/dev-env:py3.7.13-jupyter-vscode
         docker image rm e300nlp/dev-env:py3.7.13-jupyter-vscode
+
+        docker build -t=e300nlp/dev-env:py3.8.13-jupyter-vscode -f py3.8.13-jupyter-vscode .
+        docker push e300nlp/dev-env:py3.8.13-jupyter-vscode
+        docker image rm e300nlp/dev-env:py3.8.13-jupyter-vscode
+
+        docker build -t=e300nlp/dev-env:py3.9.13-jupyter-vscode -f py3.9.13-jupyter-vscode .
+        docker push e300nlp/dev-env:py3.9.13-jupyter-vscode
+        docker image rm e300nlp/dev-env:py3.9.13-jupyter-vscode
+
+        docker build -t=e300nlp/dev-env:cu113-py3.9.13-torch1.11.0-tf2.6.0-jupyter-vscode -f cu113-py3.9.13-torch1.11.0-tf2.6.0-jupyter-vscode .
+        docker push e300nlp/dev-env:cu113-py3.9.13-torch1.11.0-tf2.6.0-jupyter-vscode
+        docker image rm e300nlp/dev-env:cu113-py3.9.13-torch1.11.0-tf2.6.0-jupyter-vscode
+    
     
