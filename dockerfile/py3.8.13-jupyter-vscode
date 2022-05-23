@@ -1,0 +1,54 @@
+FROM python:3.8.13
+LABEL maintainer="p208p2002@gmail.com"
+
+#
+WORKDIR /
+
+# 
+RUN apt-get update
+RUN apt-get install -y sudo \ 
+                        apt-utils \
+                        wget \
+                        vim \
+                        git \
+                        curl
+
+# ip、ping
+RUN apt-get install -y net-tools \
+                        iputils-ping
+
+# ssh
+RUN apt-get install -y openssh-server
+RUN apt-get install -y wget
+COPY config_files/ssh_config /etc/ssh/ssh_config
+RUN service ssh restart
+
+# fail2ban
+RUN apt-get install -y fail2ban
+COPY config_files/jail.conf /etc/fail2ban/jail.conf
+RUN service fail2ban restart
+
+# script for create user
+COPY script_files/docker_start.sh /docker_start.sh
+RUN chmod 777 /docker_start.sh
+
+# jupyter
+RUN pip install notebook
+RUN jupyter notebook --generate-config
+COPY config_files/jupyter_notebook_config.py /root/.jupyter/jupyter_notebook_config.py
+
+# nodejs
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
+RUN sudo apt install nodejs
+
+# vscode-server
+RUN npm install -g yarn&&yarn global add code-server
+ENV SHELL=/bin/bash
+
+#
+EXPOSE 22
+EXPOSE 8888
+EXPOSE 8080
+
+#
+ENTRYPOINT /docker_start.sh && /bin/bash

@@ -13,7 +13,6 @@
 # limitations under the License.
 # ==============================================================================
 import os
-from IPython.lib import passwd
 
 c = c  # pylint:disable=undefined-variable
 c.NotebookApp.ip = '*'
