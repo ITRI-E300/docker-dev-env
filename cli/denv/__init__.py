@@ -1,4 +1,5 @@
 import argparse
+from traceback import print_tb
 import requests
 import json
 import os
@@ -18,8 +19,7 @@ parser = argparse.ArgumentParser(add_help=True,usage='%(prog)s action\nmore info
 parser.add_argument("action", help="select one of: {list|create|update}")
 parser.add_argument('--dry-run','-d',action='store_true')
 parser.error = arg_parser_error_handler
-args = parser.parse_args()
-# print(args)
+args,unknow = parser.parse_known_args()
 
 
 if not os.path.isfile(os.path.join(Path.home(),'.denv.conf.json')):
@@ -168,18 +168,26 @@ def create_volume(volume_name=None):
 
     return volume_name
     
-def update_images():
+def update_images(update_all=False):
     image_tags = list_image_tags()
-    for i,image_tag in enumerate(image_tags):
-        print("[%d] %s"%(i+1,image_tag))
-    update_image_id =  int(input('which image to update?'))-1
 
-    docker_run_cmd = 'docker pull %s'%image_tags[update_image_id]
-    if args.dry_run:
-        print("$",docker_run_cmd)
+    if update_all == False:
+        for i,image_tag in enumerate(image_tags):
+            print("[%d] %s"%(i+1,image_tag))
+        update_image_id =  int(input('which image to update?'))-1
+
+        docker_run_cmd = 'docker pull %s'%image_tags[update_image_id]
+        if args.dry_run:
+            print("$",docker_run_cmd)
+        else:
+            print("$",docker_run_cmd)
+            os.system(docker_run_cmd)
     else:
-        print("$",docker_run_cmd)
-        os.system(docker_run_cmd)
+        for image_tag in image_tags:
+            docker_run_cmd = 'docker pull %s'%image_tag
+            print("$",docker_run_cmd)
+            if not args.dry_run:
+                os.system(docker_run_cmd)
 
 def main():
     if(args.action == 'list'):
@@ -193,5 +201,6 @@ def main():
     elif(args.action == 'create_volume'):
         create_volume()
     
-    elif(args.action == 'update'):
-        update_images()
+    elif(args.action == 'update'):        
+        update_all = True if 'all' in unknow else False
+        update_images(update_all)
