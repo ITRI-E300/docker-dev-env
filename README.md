@@ -24,7 +24,7 @@ sudo python3 -m pip install -U git+https://github.com/ITRI-E300/docker-dev-env#s
 ```bash
 denv create
 ```
-> 使用`--dry_run`來測試指令
+> 使用`--dry-run`來測試指令
 #### 建立新Volume
 ```bash
 denv create_volume
@@ -37,6 +37,9 @@ denv list
 ```bash
 denv update
 ```
+```bash
+denv update all
+```
 ### 使用 (DockerHub)
 待補充
 
@@ -45,6 +48,3 @@ denv update
 - `.github/`: Github Action 設定檔，當有Push(或每月)自動建置新映像檔
 - `cli/`: 建立 Container 的輔助工具
 - `dockerfile/`: 映像檔建構檔案
-
-sudo docker build -t test -f py3.9.8-jupyter-vscode .
-sudo docker run -itd --rm --gpus all -v p208:/user_data --name=p208 -e"NAME"=p208 -e"PASSWORD"=p2002   -p 14001:22 -p 14002:8888 -p 14003:8080 test
