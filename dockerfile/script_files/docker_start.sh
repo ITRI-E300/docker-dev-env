@@ -25,10 +25,12 @@ touch already_ran;
 # Run repeat
 service fail2ban start;
 service ssh start;
-SERVICE_HOME = '/'
 if [ -d "/user_data" ]; then 
     # volume exists" 
-    SERVICE_HOME = '/user_data'
+    (nohup runuser -l $NAME -c "export PASSWORD=$PASSWORD&&jupyter notebook --ip=0.0.0.0 --notebook-dir=/user_data" 2> /dev/null&);
+    (nohup runuser -l $NAME -c "export PASSWORD=$PASSWORD&&export SHELL=/bin/bash&&code-server --host 0.0.0.0 /user_data" 2> /dev/null&);
+else
+    (nohup runuser -l $NAME -c "export PASSWORD=$PASSWORD&&jupyter notebook --ip=0.0.0.0 --notebook-dir=/" 2> /dev/null&);
+    (nohup runuser -l $NAME -c "export PASSWORD=$PASSWORD&&export SHELL=/bin/bash&&code-server --host 0.0.0.0 /" 2> /dev/null&);
 fi
-(nohup runuser -l $NAME -c "export PASSWORD=$PASSWORD&&export SHELL=/bin/bash&&code-server --host 0.0.0.0 $SERVICE_HOME" 2> /dev/null&);
-(nohup runuser -l $NAME -c "export PASSWORD=$PASSWORD&&jupyter notebook --ip=0.0.0.0 --notebook-dir=$SERVICE_HOME" 2> /dev/null&);
+
